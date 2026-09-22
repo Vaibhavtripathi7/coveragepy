@@ -44,6 +44,11 @@ Unreleased
 - In an abundance of caution, prevent forged SQLite journal files from deleting
   files they shouldn't.
 
+- Fix: ``--source=/`` (or any source path resolving to the filesystem root)
+  matched no files, so nothing was measured. This is now fixed, closing
+  `issue 2291`_.
+
+.. _issue 2291: https://github.com/coveragepy/coveragepy/issues/2291
 .. _issue 2295: https://github.com/coveragepy/coveragepy/issues/2295
 
 
