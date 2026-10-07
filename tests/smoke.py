@@ -7,7 +7,13 @@ This is not a test used by pytest, it's run by cibuildwheel.
 """
 
 # pragma: exclude file from coverage
-from coverage.tracer import CTracer  # pylint: disable=import-error, no-name-in-module
+
+# Sometimes CTracer is importable when pylint runs and sometime it isn't.
+# So we have to suppress import errors when it can't be imported, and suppress
+# warnings about useless suppressions when it can!
+# pylint: disable=import-error, no-name-in-module, useless-suppression
+
+from coverage.tracer import CTracer
 
 
 assert hasattr(CTracer(), "start")
