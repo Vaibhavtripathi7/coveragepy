@@ -23,19 +23,52 @@ upgrading your version of coverage.py.
 Unreleased
 ----------
 
-- Fix: on Python 3.14 and later, a ``for`` loop completing immediately before a
-  function return could mistakenly report an uncovered branch. This is now
-  fixed, closing `issue 2168`_.
+- Dropped support for Python 3.10.
+
+- Fix: a comment or string that merely mentioned ``if True:`` or
+  ``while True:`` could mark its line as a branch that is known to be partial,
+  so a branch that never ran was reported as taken.  These built-in patterns
+  now only match at the start of the statement.  Closes `issue 2314`_.
+
+.. _issue 2314: https://github.com/coveragepy/coveragepy/issues/2314
+
+- Fix: a file pattern (from ``include``, ``omit``, or a ``[paths]`` alias)
+  containing a newline sent the glob-to-regex translation into an infinite
+  loop, hanging the process.  Newlines in patterns are now handled like any
+  other character.
+
+- Binary wheels are now provided for iOS and Android. This allows the use of
+  the optimized C tracer on mobile platforms.
 
 - Fix: ``--source=/`` (or any source path resolving to the filesystem root)
   matched no files, so nothing was measured. This is now fixed, closing
   `issue 2291`_.
 
-.. _issue 2168: https://github.com/coveragepy/coveragepy/issues/2168
 .. _issue 2291: https://github.com/coveragepy/coveragepy/issues/2291
 
-
 .. start-releases
+
+.. _changes_7-16-2:
+
+Version 7.16.2 — 2026-09-27
+---------------------------
+
+- Fix: on Python 3.14 and later, a ``for`` loop completing immediately before a
+  function return could mistakenly report an uncovered branch. This is now
+  fixed, closing `issue 2168`_.
+
+- Fix: on Python 3.14 and later, the ``else`` clause of a ``try`` whose body is
+  a ``with`` statement could incorrectly be reported as covered when the
+  ``with`` raised.  This is now fixed, closing `issue 2289`_.
+
+- Fix: with ``dynamic_context = test_function``, test methods written as
+  ``@staticmethod`` or ``@classmethod`` were not given a context of their own.
+  Now they are, on Python 3.11 and later.  Closes `issue 1923`_.
+
+.. _issue 1923: https://github.com/coveragepy/coveragepy/issues/1923
+.. _issue 2168: https://github.com/coveragepy/coveragepy/issues/2168
+.. _issue 2289: https://github.com/coveragepy/coveragepy/issues/2289
+
 
 .. _changes_7-16-1:
 
