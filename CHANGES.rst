@@ -41,9 +41,13 @@ Unreleased
   or quotes in it was shown with entities like ``&amp;``. Now they are properly
   escaped only once.
 
+- Fix: ``--source=/`` measured no files. A file system root can't be a source
+  directory, so now it is an error. Closes `issue 2291`_.
+
 - In an abundance of caution, prevent forged SQLite journal files from deleting
   files they shouldn't.
 
+.. _issue 2291: https://github.com/coveragepy/coveragepy/issues/2291
 .. _issue 2295: https://github.com/coveragepy/coveragepy/issues/2295
 
 
