@@ -839,15 +839,13 @@ class CoverageDataFilesTest(CoverageTest):
 
         print(debug.get_output())
 
-        assert re.search(
-            r"^"
-            + r"Closing dbs, force=True: {}\n"
+        assert re.fullmatch(
+            r"Closing dbs, force=True: {}\n"
             + r"Erasing data file '.*\.coverage' \(does not exist\)\n"
             + r"Opening data file '.*\.coverage' \(does not exist\)\n"
             + r"Initing data file '.*\.coverage' \(0 bytes, modified [-:. 0-9]+\)\n"
             + r"Writing \(no-op\) data file '.*\.coverage' \(\d+ bytes, modified [-:. 0-9]+\)\n"
-            + r"Opening data file '.*\.coverage' \(\d+ bytes, modified [-:. 0-9]+\)\n"
-            + r"$",
+            + r"Opening data file '.*\.coverage' \(\d+ bytes, modified [-:. 0-9]+\)\n",
             debug.get_output(),
         )
 
